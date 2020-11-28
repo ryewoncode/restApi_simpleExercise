@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#btnTest").click(function() {
+		$.ajax({
+			url: "/demoApi/data?apiKey='demoApi'", // 서버 url
+			type: "get", //전송방식
+			dataType: "json", // 서버로 부터 받아올 데이터 형식
+			success: function(data) { // 데이터 전송/요청 성공할 떄 실행되는 함수 (반환데이터)
+				console.log(data);
+				$("#jsonData").text(JSON.stringify(data, undefined, 2));
+			},
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		}); 
+	});
+})
+
+</script>
+<body>
+	<h1>RestApi Get Data Test</h1>
+	<button id="btnTest">Get Data</button>
+	<pre id="jsonData"></pre>
+</body>
+</html>
